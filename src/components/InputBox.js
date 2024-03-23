@@ -6,6 +6,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { buttonStyles } from './sharedStyles';
 import {ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import AppBar from './AppBar';
 
 export default function InputBox() {
     const [registerObject, setRegisterObject] = useState({});
@@ -97,6 +98,8 @@ export default function InputBox() {
 
 
     return (
+        <>
+        <AppBar />
         <Box
             component="form"
             sx={{
@@ -208,6 +211,7 @@ export default function InputBox() {
       <button style={buttonStyles} disabled={showWarning || isUsernameExists} onClick={handleRegister}>Submit</button>
       <ToastContainer position="top-center" autoClose={3000} />
     </Box>
+    </>
   );
 }
 

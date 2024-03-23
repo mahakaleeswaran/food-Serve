@@ -15,6 +15,34 @@
   font-weight: bold;
   text-align: center;
 }
+.vertical-line {
+  display: flex;
+}
+
+.feedback-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  margin: 10px;
+}
+
+.feedback-item {
+  background-color: #f9f9f9;
+  padding: 10px;
+  margin: 5px;
+  border-radius: 5px;
+  text-align: center;
+  width: 200px;
+}
+
+
+.vertical-line::before {
+  content: "";
+  border-left: 2px solid white; 
+  margin: 0 20px; 
+}
+
 
 .feedback-section {
   position: fixed;
@@ -35,6 +63,7 @@
   display: flex;
   flex-direction: column;
 }
+
 
 textarea {
   width: 50%;
@@ -81,7 +110,7 @@ button:hover {
 
 .home-container {
   margin: 10px;
-  padding-right: 10px;
+  padding: 15px;
   background-color: #4CAF50;
   border-radius: 10px;
   display: flex;

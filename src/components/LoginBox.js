@@ -6,7 +6,7 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import {ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import AppBar from './AppBar';
 
 
 export default function LoginBox() {
@@ -37,7 +37,10 @@ export default function LoginBox() {
   };
 
 
+
   return (
+    <>
+    <AppBar/>
     <Box
       component="form"
       sx={{
@@ -81,5 +84,6 @@ export default function LoginBox() {
     <button style={buttonStyles} onClick={handleLogin}>Submit</button>
     <ToastContainer position="top-center" autoClose={3000} />
     </Box>
+    </>
   );
 }
