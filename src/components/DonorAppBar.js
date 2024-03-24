@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import {ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Drawer from '@mui/material/Drawer';
+import {useParams} from 'react-router-dom';
 
 
 const buttonStyles = {
@@ -30,6 +31,7 @@ const buttonStyles = {
     const [dropen, setDrOpen] = React.useState(false);
     const [position, setPosition] = useState({ latitude: null, longitude: null });
     const [location,setLocation] = useState("")
+    let { userId } = useParams();
 
     const toggleDrawer = (newOpen) => {
         setDrOpen(newOpen);
@@ -56,7 +58,7 @@ const buttonStyles = {
         fetch(`https://geocode.maps.co/reverse?lat=${position.latitude}&lon=${position.longitude}&api_key=65f92c210cf3b398078161omp63589e`)
             .then((response) => response.json())
             .then((json) => {
-                setLocation(json.display_name.split(",").slice(1, 8).join(","));
+                setLocation(json.display_name.split(", ").slice(1, 8).join(","));
          });
     }
 
@@ -87,7 +89,7 @@ const buttonStyles = {
                     "location": location,
                     "posts": foodItems_filter
                 };
-                fetch("http://localhost:8084/donor/1/post", {
+                fetch(`http://localhost:8084/donor/${userId}/post`, {
                     method: "POST",
                     body: JSON.stringify(postObject),
                     headers: {
@@ -107,6 +109,7 @@ const buttonStyles = {
         }
         setFoodItems([]);
         setDrOpen(false)
+        window.location.reload();
     }
     
 
@@ -191,7 +194,7 @@ const buttonStyles = {
     const[userProfile,setUserProfile] = useState({})
 
     useEffect(()=>{
-        fetch("http://localhost:8084/donor/1").then((response)=>response.json()).then((json)=>{
+        fetch(`http://localhost:8084/donor/${userId}`).then((response)=>response.json()).then((json)=>{
             setUserProfile(()=>json)
         })
       },[])
@@ -208,7 +211,7 @@ const buttonStyles = {
 
 
     function handleUpdate(){
-        fetch("http://localhost:8084/donor/1/updateDetails", {
+        fetch(`http://localhost:8084/donor/${userId}/updateDetails`, {
             method: "PUT",
             body: JSON.stringify(userProfile),
             headers: {
@@ -225,7 +228,7 @@ const buttonStyles = {
     }
 
     function handleDelete(){
-        fetch("http://localhost:8084/donor/1/delete", {
+        fetch(`http://localhost:8084/donor/${userId}/delete`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json; charset=UTF-8"

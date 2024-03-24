@@ -7,11 +7,13 @@ import MenuItem from '@mui/material/MenuItem';
 import {ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AppBar from './AppBar';
+import { useNavigate } from 'react-router-dom';
 
 
 export default function LoginBox() {
 
   const [users,setUsers] =  useState({});
+  const navigate = useNavigate();
 
 
   useEffect(()=>{
@@ -29,12 +31,35 @@ export default function LoginBox() {
   const handleLogin = (e) => {
     const isLoginSuccessful = users.some(user => user.username === username && user.confirmPassword === password && user.userRole === userRole);
     if (isLoginSuccessful) {
-      toast.success("Login successful");
+        toast.success("Login successful");
+        const loginObject = {
+            "userRole": userRole,
+            "username": username
+        };
+        fetch("http://localhost:8084/admin/getUserId", {
+            method: "POST",
+            body: JSON.stringify(loginObject),
+            headers: {
+                "Content-Type": "application/json; charset=UTF-8"
+            }
+        }).then((response) => response.json())
+        .then((json) => {
+            if (userRole === 'donor' && json.userId) {
+                navigate(`/donor/${json.userId}`);
+            } else if (userRole === 'receiver' && json.userId) {
+                navigate(`/reciever/${json.userId}`);
+            } else {
+                console.error("User ID not found in response");
+            }
+        })
+        .catch((error) => {
+            console.error("Error fetching user ID:", error);
+        });
     } else {
-      toast.error("Invalid credentials");
+        toast.error("Invalid credentials");
     }
     e.preventDefault();
-  };
+};
 
 
 

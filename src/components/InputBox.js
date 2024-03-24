@@ -76,7 +76,8 @@ export default function InputBox() {
 
     function postInDatabase() {
         if (registerObject) {
-            fetch("http://localhost:8084/donor/register", {
+            if(user==='donor'){
+                fetch("http://localhost:8084/donor/register", {
                 method: "POST",
                 body: JSON.stringify(registerObject),
                 headers: {
@@ -90,6 +91,22 @@ export default function InputBox() {
             .catch(e => {
                 toast.error("Account creation failed");
             });
+            }else if(user==='receiver'){
+                fetch("http://localhost:8084/reciever/register", {
+                method: "POST",
+                body: JSON.stringify(registerObject),
+                headers: {
+                    "Content-Type": "application/json; charset=UTF-8 "
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                toast.success("Account creation successful")
+            })
+            .catch(e => {
+                toast.error("Account creation failed");
+            });
+            }
         } else {
             console.log("object is empty");
         }
