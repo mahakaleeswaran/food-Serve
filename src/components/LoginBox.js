@@ -63,52 +63,58 @@ export default function LoginBox() {
 
 
 
-  return (
-    <>
-    <AppBar/>
-    <Box
-      component="form"
-      sx={{
-        width: '100%',
-        maxWidth: '500px',
-        border: '2px solid #E0E0E0',
-        padding: '10px',
-        borderRadius: '10px',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '5px',
-        margin: '40px auto',
-        bgcolor: '#F9F9F9',
-      }}
-      noValidate
-      autoComplete="off"
-    >
-      <Select
-        onChange={(e)=>{
-          setUserRole(e.target.value)
-        }}
-        variant="outlined"
-        sx={{ '& .MuiSelect-select': { backgroundColor: '#F5F5F5', color: '#333', borderRadius: '5px' }, height: '40px', margin: '17px' }}
+return (
+  <>
+      <AppBar />
+      <Box
+          component="form"
+          sx={{
+            width: '90%',
+            maxWidth: '500px',
+            border: '2px solid #E0E0E0',
+            padding: '17px',
+            borderRadius: '10px',
+            display: 'flex',
+            height:'250px',
+            flexDirection: 'column',
+            margin: '10px auto',
+            bgcolor: '#F9F9F9',
+          }}
+          noValidate
+          autoComplete="off"
       >
-        <MenuItem value="donor">Donor</MenuItem>
-        <MenuItem value="receiver">Receiver</MenuItem>
-        <MenuItem value="admin">Admin</MenuItem>
-      </Select>
-      <TextField 
-  onChange={(e) => {
-      setUsername(e.target.value);
-  }} 
-  label="Username" 
-  name="username" 
-  variant="outlined" 
-  sx={{ '& .MuiInputBase-input': { backgroundColor: '#F5F5F5', color: '#333', borderRadius: '5px' }, height: '25px', margin: '17px' }} 
-/>
-      <TextField label="Password" type="password"  onChange={(e)=>{
-        setPassword(e.target.value)
-      }}  name="password" variant="outlined" sx={{ '& .MuiInputBase-input': { backgroundColor: '#F5F5F5', color: '#333', borderRadius: '5px' }, height: '25px', margin: '17px' }} />
-    <button style={buttonStyles} onClick={handleLogin}>Submit</button>
-    <ToastContainer position="top-center" autoClose={3000} />
-    </Box>
-    </>
-  );
+          <Select
+              onChange={(e) => {
+                  setUserRole(e.target.value);
+              }}
+              variant="outlined"
+              sx={{ height: '40px', margin: '10px' }}
+          >
+              <MenuItem value="donor">Donor</MenuItem>
+              <MenuItem value="receiver">Receiver</MenuItem>
+          </Select>
+          <TextField
+              onChange={(e) => {
+                  setUsername(e.target.value);
+              }}
+              label="Username"
+              name="username"
+              variant="outlined"
+              sx={{ height: '40px', margin: '12px' }}
+          />
+          <TextField
+              label="Password"
+              type="password"
+              onChange={(e) => {
+                  setPassword(e.target.value);
+              }}
+              name="password"
+              variant="outlined"
+              sx={{ height: '40px', margin: '12px' }}
+          />
+          <button style={buttonStyles} onClick={handleLogin}>Submit</button>
+          <ToastContainer position="top-center" autoClose={3000} />
+      </Box>
+  </>
+);
 }

@@ -122,8 +122,8 @@ const buttonStyles = {
             alignItems: 'center',
             gap: '10px',
             padding: '20px',
-            width: 350,
-            backgroundColor: '#f0f0f0'
+            margin:'10px',
+            width: 250,
         }} role="presentation" onClick={() => toggleDrawer(false)}>
             <TextField
                 id="location"
@@ -142,11 +142,11 @@ const buttonStyles = {
                 <button onClick={(e) => {
                     handleMapLocation();
                     e.stopPropagation();
-                }} style={{ backgroundColor: 'red', fontFamily: "'Times New Roman', Serif", color: 'white', width: '170px', border: 'none', height: '35px', fontWeight: 'bold' }}>Map Location</button>
+                }} style={{ backgroundColor: 'red', fontFamily: "'Times New Roman', Serif", color: 'white', width: '100%', border: 'none', height: '50px', fontWeight: 'bold' }}>Map Location</button>
                 <button onClick={(e) => {
                     handleDefaultLocation();
                     e.stopPropagation();
-                }} style={{ backgroundColor: 'red', fontFamily: "'Times New Roman', Serif", color: 'white', width: '170px', border: 'none', height: '35px', fontWeight: 'bold' }}>Default Location</button>
+                }} style={{ backgroundColor: 'red', fontFamily: "'Times New Roman', Serif", color: 'white', width: '100%', border: 'none', height: '50px', fontWeight: 'bold' }}>Default Location</button>
             </Box>
             <h4>Enter Food item details</h4>
             <div>
@@ -184,7 +184,7 @@ const buttonStyles = {
                             }} style={{ backgroundColor: 'red', fontFamily: "'Times New Roman', Serif", color: 'white', width: '170px', border: 'none', height: '35px', fontWeight: 'bold' }}>Add Food Item</button>
             </Box>
             <Box sx={{ display: 'flex', justifyContent: 'center', gap: '10px' }}>
-                <button onClick={handleCreatePost} style={{ ...buttonStyles, backgroundColor: '#4CAF50', color: 'white', width: '350px',height:'40px',border: 'none' }}>Create Post</button>
+                <button onClick={handleCreatePost} style={{ ...buttonStyles, backgroundColor: '#4CAF50', color: 'white', width: '280px',height:'40px',border: 'none' }}>Create Post</button>
             </Box>
             <ToastContainer position="top-center" autoClose={3000} />
         </Box>
@@ -197,7 +197,7 @@ const buttonStyles = {
         fetch(`http://localhost:8084/donor/${userId}`).then((response)=>response.json()).then((json)=>{
             setUserProfile(()=>json)
         })
-      },[])
+      },[userId])
 
 
       function handleChange(value, key) {
@@ -281,9 +281,9 @@ const buttonStyles = {
             <Box sx={{ display: 'flex' }}>
                <div>
                <Dialog open={open} onClose={toggleDialog}>
-                    <DialogTitle style={{fontFamily: "'Times New Roman', Serif", fontWeight: 'bold',}}>Profile</DialogTitle>
+                   <DialogTitle style={{ fontFamily: "'Times New Roman', Serif", fontWeight: 'bold' }}>Profile</DialogTitle>
                     <div></div>
-                    <DialogContent sx={{ display: 'flex', flexDirection: 'column', gap: '10px', padding: '20px'}}>
+                    <DialogContent sx={{ display: 'flex', flexDirection: 'column', gap: '10px', padding: '20px' }}>
                     <TextField id="name" label="Name" onChange={(e) => handleChange(e.target.value, "name")} value={userProfile.name} variant="outlined" sx={{ width: '100%' }} />
                     <TextField id="email" label="Email" onChange={(e) => handleChange(e.target.value, "email")} value={userProfile.email} variant="outlined" sx={{ width: '100%' }} />
                     <TextField id="organization" label="Organization" onChange={(e) => handleChange(e.target.value, "organization")} value={userProfile.organization} variant="outlined" sx={{ width: '100%' }} />
@@ -291,8 +291,8 @@ const buttonStyles = {
                     <TextField id="address" label="Address" onChange={(e) => handleChange(e.target.value, "address")} value={userProfile.address} variant="outlined" sx={{ width: '100%' }} />
                     <h5 style={{ fontSize: '12px', color: '#888', marginTop: '17px', marginBottom: '5px', marginLeft:"10px"}}>Expected format: DoorNo, Street, Area, City, District, State, ZipCode</h5>
                     </DialogContent>
-                        <button variant="contained" onClick={handleUpdate} style={{ backgroundColor: '#4CAF50', color: 'white',width:"500px",margin:'5px 15px',height:"50px",fontWeight: 'bold',fontFamily: "'Times New Roman', Serif",}}>Update Details</button>
-                        <button variant="contained" onClick={handleDelete} style={{ backgroundColor: 'red', color: 'white' ,width:"500px",margin:'5px 15px',marginBottom:'10px',height:"50px",fontWeight: 'bold',fontFamily: "'Times New Roman', Serif",}}>Delete Account</button>
+                        <button variant="contained" onClick={handleUpdate} style={{ backgroundColor: '#4CAF50', color: 'white',width:"91%",margin:'5px 19px',height:"50px",fontWeight: 'bold',fontFamily: "'Times New Roman', Serif",}}>Update Details</button>
+                        <button variant="contained" onClick={handleDelete} style={{ backgroundColor: 'red', color: 'white' ,width:"91%",margin:'5px 19px',marginBottom:'10px',height:"50px",fontWeight: 'bold',fontFamily: "'Times New Roman', Serif",}}>Delete Account</button>
                 </Dialog>
                </div>
                 <button style={buttonStyles} onClick={() => toggleDrawer(true)}>Post</button>

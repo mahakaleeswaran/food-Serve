@@ -120,10 +120,10 @@ export default function InputBox() {
         <Box
             component="form"
             sx={{
-                width: '100%',
+                width: '90%',
                 maxWidth: '500px',
                 border: '2px solid #E0E0E0',
-                padding: '10px',
+                padding: '15px',
                 borderRadius: '10px',
                 display: 'flex',
                 height:'700px',
@@ -225,7 +225,7 @@ export default function InputBox() {
     />
 ))}
 <h5 style={{ fontSize: '12px', color: '#888', marginTop: '17px', marginBottom: '5px' }}>Expected format: DoorNo, Street, Area, City, District, State, ZipCode</h5>
-      <button style={buttonStyles} disabled={showWarning || isUsernameExists} onClick={handleRegister}>Submit</button>
+      <button style={{...buttonStyles,width:'92%',marginLeft:'20px'}} disabled={showWarning || isUsernameExists} onClick={handleRegister}>Submit</button>
       <ToastContainer position="top-center" autoClose={3000} />
     </Box>
     </>
