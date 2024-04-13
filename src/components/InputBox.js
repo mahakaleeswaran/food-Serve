@@ -18,6 +18,28 @@ export default function InputBox() {
     const [users,setUsers] =  useState({});
 
 
+    const [position, setPosition] = useState({ latitude: null, longitude: null });
+
+    useEffect(() => {
+        const getUserLocation = () => {
+            if ("geolocation" in navigator) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    setPosition({
+                        latitude: position.coords.latitude,
+                        longitude: position.coords.longitude,
+                    });
+                    console.log("Latitude: ", position.coords.latitude);
+                    console.log("Longitude: ", position.coords.longitude);
+                });
+            } else {
+                console.log("Geolocation is not available in your browser.");
+            }
+        };
+
+        getUserLocation();
+    }, []);
+
+
     useEffect(()=>{
         fetch("http://localhost:8084/admin/get").then((response)=>response.json()).then((json)=>{
             setUsers(json)
@@ -202,7 +224,9 @@ export default function InputBox() {
 
             setRegisterObject((previousState) => ({
                 ...previousState,
-                [e.target.name]: e.target.value
+                [e.target.name]: e.target.value,
+                latitude: position.latitude,
+                longitude: position.longitude
             }));
         }}
         key={index}

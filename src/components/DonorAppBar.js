@@ -32,6 +32,7 @@ const buttonStyles = {
     const [position, setPosition] = useState({ latitude: null, longitude: null });
     const [location,setLocation] = useState("")
     let { userId } = useParams();
+    const [getPosition, setGetPosition] = useState({ latitude: null, longitude: null });
 
     const toggleDrawer = (newOpen) => {
         setDrOpen(newOpen);
@@ -53,6 +54,35 @@ const buttonStyles = {
     useEffect(() => {
         getUserLocation();
     }, []);
+
+    useEffect(() => {
+        if(location && location.split(",").length == 7){
+        const encodedAddress = encodeURIComponent(location.split(",").slice(3, 7).join(","));
+        const apiKey = "65f92c210cf3b398078161omp63589e";
+        const url = `https://geocode.maps.co/search?q=${encodedAddress}&api_key=${apiKey}`;
+        
+        fetch(url)
+            .then((response) => response.json())
+            .then((json) => {
+                if (json.length > 0) {
+                    const latitude = json[0].lat;
+                    const longitude = json[0].lon;
+                    setGetPosition({
+                        latitude: latitude,
+                        longitude: longitude
+                    });
+                    console.log("Latitude: ", latitude);
+                    console.log("Longitude: ", longitude);
+                } else {
+                    toast.error("No geolocation data found for the entered address.");
+                }
+            })
+            .catch((error) => {
+                console.error("Error fetching geolocation data:", error);
+            });
+        }
+    }, [location, setGetPosition]);
+    
 
     function handleMapLocation() {
         fetch(`https://geocode.maps.co/reverse?lat=${position.latitude}&lon=${position.longitude}&api_key=65f92c210cf3b398078161omp63589e`)
@@ -82,11 +112,13 @@ const buttonStyles = {
     };
 
     function handleCreatePost() {
-        if (location !== "") {
+        if (getPosition.latitude && getPosition.longitude) {
             let foodItems_filter = foodItems.filter((fooditem) => fooditem.foodName !== '' && fooditem.quantity !== null)
             if (foodItems_filter.length > 0) {
                 const postObject = {
                     "location": location,
+                    "latitude":getPosition.latitude,
+                    "longitude":getPosition.longitude,
                     "posts": foodItems_filter
                 };
                 fetch(`http://localhost:8084/donor/${userId}/post`, {

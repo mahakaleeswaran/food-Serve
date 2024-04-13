@@ -198,12 +198,13 @@ function Reciever() {
     <button variant="contained" onClick={handleFilter} style={{ backgroundColor: '#4CAF50', color: 'white' ,width:"100%",margin: '0px',margin:'10px',height:"55px",fontWeight: 'bold',fontFamily: "'Times New Roman', Serif"}}>Filter</button>
                 </div>
             </Drawer>
-        <Grid container spacing={2} justifyContent="center">
+        <Grid container spacing={5} justifyContent="center">
                 {posts.map((post, index) => (
-                    <Grid item key={index} xs={12} sm={6} md={4} lg={3}>
+                    <Grid item key={index} xs={12} sm={6} md={5} lg={3}>
                         <Card style={{ borderRadius: '10px', height: '100%', margin: '20px', padding: '10px' }}>
                             <h5 style={{ fontSize: '14px', marginTop: '10px', marginBottom: '5px', marginLeft: "15px", textAlign: "left",color:'red'}}>Address</h5>
-                            <h5 style={{ fontSize: '14px', marginTop: '10px', marginBottom: '5px', marginLeft: "15px", textAlign: "left" }}>{post.location}</h5>
+                            <h5 style={{ fontSize: '14px', marginTop: '10px', marginBottom: '5px', marginLeft: "15px", textAlign: "left" }}>{post.location.split(",").slice(0,4).join(",")}</h5>
+                            <h6 style={{ fontSize: '14px', marginTop: '10px', marginBottom: '5px', marginLeft: "15px", textAlign: "left" }}>{post.location.split(",").slice(4,7).join(",")}</h6>
                             <h5 style={{ fontSize: '14px', marginTop: '10px', marginBottom: '5px', marginLeft: "15px", textAlign: "left",color:'red'}}>Donor Details</h5>
                             <h5 style={{ fontSize: '14px', marginTop: '5px', marginBottom: '5px', marginLeft: "15px", textAlign: "left" }}>{post.donorName}</h5>
                             <h5 style={{ fontSize: '14px', marginTop: '5px', marginBottom: '5px', marginLeft: "15px", textAlign: "left" }}>{post.donorPhoneNumber}</h5>

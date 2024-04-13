@@ -33,7 +33,8 @@ function Donor() {
                 {userProfile.posts && userProfile.posts.slice().reverse().map((post, index) => (
                     <Grid item key={index} xs={12} sm={6} md={4} lg={3}>
                         <Card style={{ borderRadius: '10px',margin:'20px' ,height:'fit-content',padding:'10px' }}>
-                            <h5 style={{ fontSize: '14px', marginTop: '10px', marginBottom: '5px', marginLeft: "15px",textAlign:"left" }}>{post.location}</h5>
+                        <h5 style={{ fontSize: '14px', marginTop: '10px', marginBottom: '5px', marginLeft: "15px", textAlign: "left" }}>{post.location.split(",").slice(0,3).join(",")}</h5>
+                            <h6 style={{ fontSize: '14px', marginTop: '10px', marginBottom: '5px', marginLeft: "15px", textAlign: "left" }}>{post.location.split(",").slice(3,7).join(",")}</h6>
                             <h5 style={{ fontSize: '12px', marginTop: '10px', marginBottom: '5px', marginLeft: "15px",textAlign:"left"  }}>{reverseDateFormat(post.createdDate.split("T")[0])}</h5>
                             <h5 style={{ 
                                         fontSize: '12px', 
